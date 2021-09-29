@@ -32,7 +32,7 @@ public class Contact_Adapter extends RecyclerView.Adapter<Contact_Adapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull Contact_Adapter.ViewHolder holder, int position) {
         Contact_Model modal = contactsModalArrayList.get(position);
-        holder.name.setText(modal.getFirst_name());
+        holder.name.setText(modal.getFirst_name()+' '+modal.getLast_name());
         holder.image.setImageResource(R.drawable.circle);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
