@@ -6,7 +6,7 @@ public class Contact_Model {
     String email;
     String phone_num;
 
-    public void Contact_Model(String first_name, String last_name, String email, String phone_num) {
+    public Contact_Model(String first_name, String last_name, String email, String phone_num) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;

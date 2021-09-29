@@ -34,22 +34,20 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         try {
-            JSONObject object = new JSONObject(readJSON());
-            JSONArray array = object.getJSONArray("");
+            String id, first_name, last_name, email, phone;
+            JSONArray array = new JSONArray(readJSON());
             for (int i = 0; i < array.length(); i++) {
 
                 JSONObject jsonObject = array.getJSONObject(i);
-                String id = jsonObject.getString("id");
-                String first_name = jsonObject.getString("firstName");
-                String last_name = jsonObject.getString("lastName");
-                String email = jsonObject.getString("email");
-                String phone = jsonObject.getString("phone");
 
-                Contact_Model model = new Contact_Model();
-                model.setFirst_name(first_name);
-                model.setLast_name(last_name);
-                model.setEmail(email);
-                model.setPhone_num(phone);
+                id = jsonObject.getString("id");
+                first_name = jsonObject.getString("firstName");
+                last_name = jsonObject.getString("lastName");
+                email = checkNull(jsonObject, "email");
+                phone = checkNull(jsonObject, "phone");
+
+
+                Contact_Model model = new Contact_Model(first_name, last_name, email, phone);
                 contact_models.add(model);
             }
 
@@ -79,6 +77,13 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
         return json;
+    }
+
+    public String checkNull(JSONObject json, String key){
+        if (json.isNull(key))
+            return null;
+        else
+            return json.optString(key, null);
     }
 
 }
